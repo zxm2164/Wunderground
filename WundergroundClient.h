@@ -83,6 +83,7 @@ class WundergroundClient: public JsonListener {
     void updateConditions(String apiKey, String country, String city);
     void updateForecast(String apiKey, String country, String city);
     void updateAstronomy(String apiKey, String country, String city);
+    void geolookup(String apiKey);
     String getHours();
     String getMinutes();
     String getSeconds();
@@ -100,7 +101,7 @@ class WundergroundClient: public JsonListener {
 	String getCountry();
     //String getCountry_iso3166();
     //String getCountry_name();
-    String getState()
+    String getState();
     String getCity();
     String getTZ_short();
     String getTZ_long();

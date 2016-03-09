@@ -50,7 +50,7 @@ void WundergroundClient::updateAstronomy(String apiKey, String country, String c
 }
 
 //Geolookup requests - auto location
-void WundergroundClient::geolookup(String apiKey, String country, String city) {
+void WundergroundClient::geolookup(String apiKey) {
   isForecast = false;
   doUpdate("/api/" + apiKey + "/geolookup/q/" +  "/autoip" + ".json");
 }
