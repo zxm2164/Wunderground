@@ -55,16 +55,29 @@ class WundergroundClient: public JsonListener {
     String forecastTitle [MAX_FORECAST_PERIODS];
     String forecastLowTemp [MAX_FORECAST_PERIODS];
     String forecastHighTemp [MAX_FORECAST_PERIODS];
+    
+    // astronomy
+    String sunrise;
+    String sunset;
+    String currentTime;
 
   public:
     WundergroundClient(boolean isMetric);
     void updateConditions(String apiKey, String country, String city);
     void updateForecast(String apiKey, String country, String city);
+    void updateAstronomy(String apiKey, String country, String city);
     String getHours();
     String getMinutes();
     String getSeconds();
     String getDate();
     long getCurrentEpoch();
+    
+    //functions for returning Astronomy data
+    String getSunrise();
+    String getSunset();
+    String getCurrentTime();
+//    String getMoonAge();
+//    String getPercentIlluminated();
 
     String getCurrentTemp();
 

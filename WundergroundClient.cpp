@@ -43,6 +43,12 @@ void WundergroundClient::updateForecast(String apiKey, String country, String ci
   doUpdate("/api/" + apiKey + "/forecast10day/q/" + country + "/" + city + ".json");
 }
 
+//Astronomy returns sunrise and sunset data
+void WundergroundClient::updateAstronomy(String apiKey, String country, String city) {
+  isForecast = false;
+  doUpdate("/api/" + apiKey + "/astronomy/q/" + country + "/" + city + ".json");
+}
+
 void WundergroundClient::doUpdate(String url) {
   JsonStreamingParser parser;
   parser.setListener(this);
@@ -172,6 +178,32 @@ void WundergroundClient::value(String value) {
         forecastLowTemp[dailyForecastPeriod] = value;
       }
   }
+  
+  //------------------Keys for astronomy---------------------------
+  if (currentKey == "hour") {
+  	if (currentParent == "sunrise"){
+    	sunrise = value;
+    }
+    if (currentParent == "sunset"){
+    	sunset = value;
+    }
+    if (currentParent == "current_time"){
+    	currentTime = value;
+    }
+  }
+  if (currentKey == "minute") {
+  	if (currentParent == "sunrise"){
+  		sunrise = sunrise + value;
+  	}
+  	if (currentParent == "sunset"){
+  		sunset = sunset + value;
+  	}
+  	if (currentParent == "current_time"){
+  		currentTime = currentTime + value;
+  	}
+  }
+  
+  
 }
 
 void WundergroundClient::endArray() {
@@ -318,4 +350,14 @@ String WundergroundClient::getMeteoconIcon(String iconText) {
   if (iconText == "nt_tstorms") return "&";
 
   return ")";
+}
+   
+String WundergroundClient::getSunrise() {
+  return sunrise;
+}
+String WundergroundClient::getSunset() {
+  return sunset;
+}
+String WundergroundClient::getCurrentTime() {
+  return currentTime;
 }
