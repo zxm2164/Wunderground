@@ -60,6 +60,23 @@ class WundergroundClient: public JsonListener {
     String sunrise;
     String sunset;
     String currentTime;
+    
+    //geolookup - autolocation
+    String country;
+    String country_iso3166;
+    String country_name;
+    String state;
+    String city;
+    String tz_short;
+    String tz_long;
+    String lat;
+    String lon;
+    String zip;
+    String magic;
+    String wmo;
+    String l;
+    String requesturl;
+    String wuiurl;
 
   public:
     WundergroundClient(boolean isMetric);
@@ -78,6 +95,23 @@ class WundergroundClient: public JsonListener {
     String getCurrentTime();
 //    String getMoonAge();
 //    String getPercentIlluminated();
+
+	//functions for returning location data
+	String getCountry();
+    //String getCountry_iso3166();
+    //String getCountry_name();
+    String getState()
+    String getCity();
+    String getTZ_short();
+    String getTZ_long();
+// String getLat();
+//     String getLon();
+//     String getZip;
+//     String getMagic;
+//     String getWmo;
+//     String getL;
+//     String getRequesturl;
+//     String getWuiurl;
 
     String getCurrentTemp();
 

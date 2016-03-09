@@ -49,6 +49,12 @@ void WundergroundClient::updateAstronomy(String apiKey, String country, String c
   doUpdate("/api/" + apiKey + "/astronomy/q/" + country + "/" + city + ".json");
 }
 
+//Geolookup requests - auto location
+void WundergroundClient::geolookup(String apiKey, String country, String city) {
+  isForecast = false;
+  doUpdate("/api/" + apiKey + "/geolookup/q/" +  "/autoip" + ".json");
+}
+
 void WundergroundClient::doUpdate(String url) {
   JsonStreamingParser parser;
   parser.setListener(this);
@@ -203,6 +209,31 @@ void WundergroundClient::value(String value) {
   	}
   }
   
+  //--------------------Keys for geolookup--------------------------
+  if (currentParent == "location"){
+  	if (currentKey == "country"){
+  		country = value;
+  	}
+  	if (currentKey == "country_name"){
+  		country_name = value;
+  	}
+  	if (currentKey == "state"){
+  		state = value;
+  	}
+  	if (currentKey == "city"){
+  		city = value;
+  	}
+  	if (currentKey == "tz_short"){
+  		tz_short = value;
+  	}
+  	if (currentKey == "tz_long"){
+  		tz_long = value;
+  	}
+  	
+  
+  
+  }
+  
   
 }
 
@@ -351,7 +382,9 @@ String WundergroundClient::getMeteoconIcon(String iconText) {
 
   return ")";
 }
-   
+  
+  
+//Functions to return astronomy data 
 String WundergroundClient::getSunrise() {
   return sunrise;
 }
@@ -361,3 +394,22 @@ String WundergroundClient::getSunset() {
 String WundergroundClient::getCurrentTime() {
   return currentTime;
 }
+
+//Functions to return geolookup data
+String WundergroundClient::getCountry(){
+	return country;
+}
+
+String WundergroundClient::getState(){
+	return state;
+}
+String WundergroundClient::getCity(){
+	return city;
+}
+String WundergroundClient::getTZ_short(){
+	return tz_short;
+}
+String WundergroundClient::getTZ_long(){
+	return tz_long;
+}
+
